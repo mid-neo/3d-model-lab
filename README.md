@@ -1,8 +1,8 @@
 # 3D Model Lab
 
-Interactive 3D models to explore and learn from, in the browser. The first
-model is the **F-35A**; the project is built so other aircraft and unrelated
-models can be added without touching the viewer engine.
+Interactive 3D models to explore and learn from, in the browser. The catalog
+has the **F-35A** and the **F-22A**; the project is built so other aircraft and
+unrelated models can be added without touching the viewer engine.
 
 Static site: TypeScript, Vite and Three.js. No backend, no login.
 Deploys to GitHub Pages: `https://mid-neo.github.io/3d-model-lab/` once Pages
@@ -10,7 +10,7 @@ is enabled (see [Deployment](#deployment)).
 
 ## Features (v0.1)
 
-- Model catalog (currently one entry, the F-35A), linkable as `#/model/<id>`.
+- Model catalog (F-35A, F-22A), linkable as `#/model/<id>`.
 - Large 3D viewport: rotate, zoom and pan with mouse or touch (OrbitControls).
 - Front, side, top and perspective views, each framed from the model's own
   geometry. Reset camera.
@@ -18,7 +18,8 @@ is enabled (see [Deployment](#deployment)).
   started. Dragging the model cancels it.
 - Wireframe toggle and adjustable lighting (key light intensity and direction,
   ambient light).
-- Downloads: the GLB model and the original standalone HTML viewer.
+- Downloads: the GLB model, plus per-model extras (the F-35A's original
+  standalone HTML viewer, the F-22A's original FlightGear source files).
 - Loading progress, error state with retry, and a WebGL check. Without WebGL
   the page links to the original viewer, which draws with a 2D canvas.
 - Dimensions shown in the panel are measured from the model's bounding box,
@@ -64,6 +65,7 @@ src/
     dom.ts                  Small DOM helpers
   styles.css                Dark blue theme, responsive layout
 tests/                      Vitest unit tests
+tools/ac2glb.py             AC3D (.ac) to GLB converter used for the F-22A
 .github/workflows/          CI for PRs, GitHub Pages deployment from main
 ```
 
@@ -127,6 +129,13 @@ if the repository is renamed or forked.
   The upstream repository's license was checked on 2026-10-13; details and
   what could not be verified are in
   [`public/models/f35a/CREDITS.md`](public/models/f35a/CREDITS.md).
+- **F-22A model** (`public/models/f22/`): by Fabrizio Fracaroli (AeroFab),
+  from the [FlightGear FGAddon](https://sourceforge.net/p/flightgear/fgaddon/HEAD/tree/trunk/Aircraft/Lockheed-Martin-FA-22A-Raptor/)
+  aircraft package, under the
+  [GNU GPL v2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
+  `F22.glb` is converted from the upstream `.ac` file; the unmodified source
+  files are shipped next to it as `F22-source.zip`. Details in
+  [`public/models/f22/CREDITS.md`](public/models/f22/CREDITS.md).
 - [Three.js](https://threejs.org/) (MIT) for rendering, glTF loading and
   orbit controls.
 
