@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Explore interactive 3D models in your browser. Starting with the F-35A." />
+    <meta name="theme-color" content="#0a1628" />
+    <title>3D Model Lab</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#/" aria-label="3D Model Lab home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 3 28 10v12l-12 7-12-7V10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+          <path d="M4 10l12 7 12-7M16 17v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+        </svg>
+        <span class="brand-name">3D Model Lab</span>
+      </a>
+      <p class="tagline">Interactive 3D models to explore and learn from</p>
+      <a class="topbar-link" href="https://github.com/mid-neo/3d-model-lab" target="_blank" rel="noopener">Source</a>
+    </header>
+
+    <div class="layout">
+      <nav class="catalog" aria-labelledby="catalog-heading">
+        <h2 id="catalog-heading" class="section-title">Catalog</h2>
+        <ul id="catalog-list" class="catalog-list"></ul>
+      </nav>
+
+      <main class="stage">
+        <div class="stage-head">
+          <div>
+            <p id="model-category" class="eyebrow"></p>
+            <h1 id="model-name" class="model-name">Loading…</h1>
+          </div>
+          <p class="hint hint-mouse">Drag to rotate · scroll to zoom · right-drag to pan</p>
+          <p class="hint hint-touch">Drag to rotate · pinch to zoom · two fingers to pan</p>
+        </div>
+
+        <div id="viewport" class="viewport" aria-label="3D viewport" role="region">
+          <div id="overlay" class="overlay" role="status" aria-live="polite" hidden></div>
+        </div>
+
+        <div class="toolbar" role="toolbar" aria-label="Camera">
+          <div class="segmented" role="group" aria-label="Preset views">
+            <button type="button" class="seg" data-view="perspective" aria-pressed="true">Perspective</button>
+            <button type="button" class="seg" data-view="front" aria-pressed="false">Front</button>
+            <button type="button" class="seg" data-view="side" aria-pressed="false">Side</button>
+            <button type="button" class="seg" data-view="top" aria-pressed="false">Top</button>
+          </div>
+          <div class="toolbar-actions">
+            <button type="button" class="btn" id="reset-camera">Reset camera</button>
+            <button type="button" class="btn btn-accent" id="rotate-360">Rotate 360°</button>
+          </div>
+        </div>
+      </main>
+
+      <aside class="panel" aria-label="Model details and settings">
+        <section class="card">
+          <h2 class="section-title">About this model</h2>
+          <p id="model-summary" class="muted"></p>
+          <dl id="model-measurements" class="facts"></dl>
+          <p id="measurements-note" class="facts-note" hidden>Measured from the 3D model’s bounding box, not official specifications.</p>
+        </section>
+
+        <section class="card" id="display-settings">
+          <h2 class="section-title">Display</h2>
+          <label class="switch">
+            <input type="checkbox" id="wireframe-toggle" role="switch" />
+            <span class="switch-track" aria-hidden="true"></span>
+            <span>Wireframe</span>
+          </label>
+          <div class="slider">
+            <label for="light-intensity">Light intensity <output id="light-intensity-value"></output></label>
+            <input type="range" id="light-intensity" min="0" max="3" step="0.05" />
+          </div>
+          <div class="slider">
+            <label for="light-azimuth">Light direction <output id="light-azimuth-value"></output></label>
+            <input type="range" id="light-azimuth" min="0" max="360" step="1" />
+          </div>
+          <div class="slider">
+            <label for="light-ambient">Ambient light <output id="light-ambient-value"></output></label>
+            <input type="range" id="light-ambient" min="0" max="2" step="0.05" />
+          </div>
+          <button type="button" class="btn btn-small" id="reset-lighting">Reset lighting</button>
+        </section>
+
+        <section class="card">
+          <h2 class="section-title">Downloads</h2>
+          <ul id="downloads" class="downloads"></ul>
+        </section>
+
+        <section class="card">
+          <h2 class="section-title">Credits &amp; license</h2>
+          <div id="credits" class="credits"></div>
+        </section>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <p>
+        Application code: MIT License. Each model keeps its own license, shown with the model.
+        <a href="https://github.com/mid-neo/3d-model-lab#roadmap" target="_blank" rel="noopener">Roadmap</a>
+      </p>
+    </footer>
+
+    <noscript>
+      <p class="noscript">This viewer needs JavaScript. You can still download the
+        <a href="./models/f35a/F35A.glb" download>F-35A model (GLB)</a>.</p>
+    </noscript>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
